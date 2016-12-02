@@ -12,6 +12,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
     """
     def data_received(self, chunk):
         pass
+
     def get(self):
         try:
             signature = self.get_argument('signature')
@@ -29,12 +30,12 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         except Exception as e:
             logger.error('微信sign校验,---Exception' + str(e))
 
-            def check_signature(self, signature, timestamp, nonce):
-                """校验token是否正确"""
-                token = 'test12345'
-                L = [timestamp, nonce, token]
-                L.sort()
-                s = L[0] + L[1] + L[2]
-                sha1 = hashlib.sha1(s.encode('utf-8')).hexdigest()
-                logger.debug('sha1=' + sha1 + '&signature=' + signature)
-                return sha1 == signature
+    def check_signature(self, signature, timestamp, nonce):
+        """校验token是否正确"""
+        token = 'test12345'
+        L = [timestamp, nonce, token]
+        L.sort()
+        s = L[0] + L[1] + L[2]
+        sha1 = hashlib.sha1(s.encode('utf-8')).hexdigest()
+        logger.debug('sha1=' + sha1 + '&signature=' + signature)
+        return sha1 == signature
