@@ -1,4 +1,4 @@
-import loggin
+import logging
 from logging import Logger
 from logging.handlers import TimedRotatingFileHandler
 
@@ -24,7 +24,8 @@ def init_logger(logger_name):
             handler2.setFormatter(formatter)
             handler2.setLevel(logging.ERROR)
             logger1.addHandler(handler2)
-            # console console = logging.StreamHandler()
+            # console
+            console = logging.StreamHandler()
             console.setLevel(logging.DEBUG)
             # 设置日志打印格式
             console.setFormatter(formatter)
