@@ -14,7 +14,6 @@ def init_logger(logger_name):
         try:
             handler1 = TimedRotatingFileHandler('/home/odoo/wechat/core/log/all.log', when='D', interval=1, backupCount=7)
         except Exception:
-            handler1 = TimedRotatingFileHandler('D:\NewProject\Wechat\Core\log\/all.log', when='D', interval=1, backupCount=7)
             handler1.setFormatter(formatter)
             handler1.setLevel(logging.DEBUG)
             logger1.addHandler(handler1)
@@ -22,7 +21,6 @@ def init_logger(logger_name):
         try:
             handler2 = TimedRotatingFileHandler('/home/odoo/wechat/core/log/error.log', when='D', interval=1, backupCount=7)
         except Exception:
-            handler2 = TimedRotatingFileHandler('D:\NewProject\Wechat\Core\log\logerror.log', when='D', interval=1, backupCount=7)
             handler2.setFormatter(formatter)
             handler2.setLevel(logging.ERROR)
             logger1.addHandler(handler2)
