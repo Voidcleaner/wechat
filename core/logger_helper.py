@@ -12,25 +12,28 @@ def init_logger(logger_name):
         formatter =logging.Formatter(format_str, df)
 
         try:
-            handler1 = TimedRotatingFileHandler('/usr/web_wx/log/all.log', when='D', interval=1, backupCount=7)
-            except Exception:
-                handler1 = TimedRotatingFileHandler('D:\NewProject\Wechat\Core\log\all.log', when='D', interval=1, backupCount=7)
-                handler1.setFormatter(formatter)
-                handler1.setLevel(logging.DEBUG)
-                logger1.addHandler(handler1)
+            handler1 = TimedRotatingFileHandler('/home/odoo/wechat/core/log/all.log', when='D', interval=1, backupCount=7)
+        except Exception:
+            handler1 = TimedRotatingFileHandler('D:\NewProject\Wechat\Core\log\all.log', when='D', interval=1, backupCount=7)
+            handler1.setFormatter(formatter)
+            handler1.setLevel(logging.DEBUG)
+            logger1.addHandler(handler1)
 
-                try: handler2 = TimedRotatingFileHandler('/usr/web_wx/log/error.log', when='D', interval=1, backupCount=7)
-                except Exception:
-                    handler2 = TimedRotatingFileHandler('D:\NewProject\Wechat\Core\log\logerror.log', when='D', interval=1, backupCount=7)
-                handler2.setFormatter(formatter) handler2.setLevel(logging.ERROR) logger1.addHandler(handler2)
-                # console console = logging.StreamHandler()
-                console.setLevel(logging.DEBUG)
-                # 设置日志打印格式
-                console.setFormatter(formatter)
-                # 将定义好的console日志handler添加到root logger
-                logger1.addHandler(console)
-                logger1 = logging.getLogger(logger_name)
-                return logger1
+        try:
+            handler2 = TimedRotatingFileHandler('/home/odoo/wechat/core/log/error.log', when='D', interval=1, backupCount=7)
+        except Exception:
+            handler2 = TimedRotatingFileHandler('D:\NewProject\Wechat\Core\log\logerror.log', when='D', interval=1, backupCount=7)
+            handler2.setFormatter(formatter)
+            handler2.setLevel(logging.ERROR)
+            logger1.addHandler(handler2)
+            # console console = logging.StreamHandler()
+            console.setLevel(logging.DEBUG)
+            # 设置日志打印格式
+            console.setFormatter(formatter)
+            # 将定义好的console日志handler添加到root logger
+            logger1.addHandler(console)
+            logger1 = logging.getLogger(logger_name)
+            return logger1
 
             logger = init_logger('runtime-log')
 
