@@ -14,31 +14,34 @@ def init_logger(logger_name):
         try:
             handler1 = TimedRotatingFileHandler('/home/odoo/wechat/core/log/all.log', when='D', interval=1, backupCount=7)
         except Exception:
-            handler1.setFormatter(formatter)
-            handler1.setLevel(logging.DEBUG)
-            logger1.addHandler(handler1)
+            handler1 = TimedRotatingFileHandler('/home/odoo/log/all.log', when='D', interval=11, backupCount=7)
+        handler1.setFormatter(formatter)
+        handler1.setLevel(logging.DEBUG)
+        logger1.addHandler(handler1)
 
         try:
-            handler2 = TimedRotatingFileHandler('/home/odoo/wechat/core/log/error.log', when='D', interval=1, backupCount=7)
+            handler2 =  TimedRotatingFileHandler('/home/odoo/wechat/core/log/error.log', when='D', interval=1, backupCount=7)
         except Exception:
-            handler2.setFormatter(formatter)
-            handler2.setLevel(logging.ERROR)
-            logger1.addHandler(handler2)
-            # console
-            console = logging.StreamHandler()
-            console.setLevel(logging.DEBUG)
-            # 设置日志打印格式
-            console.setFormatter(formatter)
-            # 将定义好的console日志handler添加到root logger
-            logger1.addHandler(console)
-            logger1 = logging.getLogger(logger_name)
-            return logger1
+            handler2 = TimedRotatingFileHandler('/home/odoo/wechat/core/log/error.log', when='D', interval=1, backupCount=7)
+        handler2.setFormatter(formatter)
+        handler2.setLevel(logging.ERROR)
+        logger1.addHandler(handler2)
+        # console
+        console = logging.StreamHandler()
+        console.setLevel(logging.DEBUG)
+        # 设置日志打印格式
+        console.setFormatter(formatter)
+        # 将定义好的console日志handler添加到root logger
+        logger1.addHandler(console)
 
-            logger = init_logger('runtime-log')
+    logger1 = logging.getLogger(logger_name)
+    return logger1
 
-            if __name__ == '__main__':
-                logger.debug('test-debug')
-                logger.info('test-info')
-                logger.warn('test-warn')
-                logger.error('test-error')
+logger = init_logger('runtime-log')
+
+if __name__ == '__main__':
+    logger.debug('test-debug')
+    logger.info('test-info')
+    logger.warn('test-warn')
+    logger.error('test-error')
                 
