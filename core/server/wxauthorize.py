@@ -54,7 +54,29 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         ToUserName = data.find('ToUserName').text
         FromUserName = data.find('FromUserName').text
         MsgType = data.find('MsgType').text
-        if MsgType == 'event':
+        if MsgType == 'text' or MsgType == 'voice':
+            try:
+                MsgId = data.find("MsgId").text
+                if MsgType == 'text':
+                    Content = data.find('Content').text
+                elif MsgType == 'voice':
+                    Content = data.find('Recognition').text
+
+                if Content == u'你好':
+                    reply_content = '您好，请问有什么可以帮助您的吗？'
+
+                else:
+                    reply_content = '客服小二智商不够'
+
+                if reply_content:
+                    CreateTime = int(time.time())
+                    out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
+                    self.write(out)
+            except:
+                pass
+
+
+        elif MsgType == 'event':
             '''接收事件推送'''
             try:
                 Event = data.find('Event').text
