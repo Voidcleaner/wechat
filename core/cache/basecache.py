@@ -14,7 +14,7 @@ class BaseCache(object):
 
     _host = CACHE_SERVER.get('host', '')
     _port = CACHE_SERVER.get('port', '')
-    _database = CACHE_SERVER.get('db', '')
+    _db = CACHE_SERVER.get('db', '')
     _password = CACHE_SERVER.get('password', '')
 
 
