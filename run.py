@@ -4,7 +4,7 @@ import tornado.ioloop
 import tornado.web
 from tornado.options import define, options
 from core.url import urlpatterns
-from core.server.wxshedule import WxSchedule
+from core.server.wxschedule import WxSchedule
 
 
 define('port', default=8000, help='run on the given port', type=int)
