@@ -63,7 +63,7 @@ class WxSchedule(object):
             tornado.ioloop.IOLoop.instance().call_later(10, self.get_access_token)
 
 
-if __name == '__main__':
+if __name__ == '__main__':
 
     wxschedule = WxSchedule()
     wx_schedule.execute()
