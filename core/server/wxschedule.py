@@ -30,12 +30,12 @@ class WxSchedule(object):
                 access_token = d['access_token']
                 self._token_cache.set_access_cache(self._token_cache.KEY_ACCESS_TOKEN, access_token)
                 self.get_jsapi_ticket()
-            return access_token
+                return access_token
 
             elif 'errcode' in d.keys():
-                errcode = d['errcode']
-                logger.info('【获取微信全局唯一票据access_token-SDK】errcode[' + errcode + '] , will retry get_access_token() method after 10s')
-                tornado.ioloop.IOLoop.instance().call_later(10, self.get_access_token)
+            errcode = d['errcode']
+            logger.info('【获取微信全局唯一票据access_token-SDK】errcode[' + errcode + '] , will retry get_access_token() method after 10s')
+            tornado.ioloop.IOLoop.instance().call_later(10, self.get_access_token)
         else:
             logger.error('【获取微信全局唯一票据access_token】request access_token error, will retry get_access_token() method after 10s')
             tornado.ioloop.IOLoop.instance().call_later(10, self.get_access_token)
