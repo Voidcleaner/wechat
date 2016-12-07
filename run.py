@@ -2,9 +2,9 @@ import os
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
-
 from tornado.options import define, options
 from core.url import urlpatterns
+from core.server.wxshedule import WxSchedule
 
 
 define('port', default=8000, help='run on the given port', type=int)
@@ -24,6 +24,9 @@ def main():
         tornado.options.parse_command_line()
         http_server = tornado.httpserver.HTTPServer(Application())
         http_server.listen(options.port)
+
+        wx_schedule = WxSchedule()
+        wx_schedule.execute()
         tornado.ioloop.IOLoop.current().start()
 
 
