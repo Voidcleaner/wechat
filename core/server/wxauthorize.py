@@ -118,7 +118,6 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 if Content == u'你好':
                     MsgType = 'text'
                     reply_content = '您好,请问有什么可以帮助您的吗?'
-                    out = self.reply_text(FromUserName, ToUserName, CreateTime, MsgType, reply_content)
                 else:
                     # 查找不到关键字,默认回复
                     MsgType = "transfer_customer_service"
@@ -126,6 +125,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 if reply_content:
                     CreateTime = int(time.time())
                     out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
+                    self.write(out)
             except:
                 pass
 
