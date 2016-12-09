@@ -116,14 +116,16 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 elif MsgType == 'voice':
                     Content = data.find('Recognition').text  # 语音识别结果，UTF8编码
                 if Content == u'你好':
+                    MsgType = 'text'
                     reply_content = '您好,请问有什么可以帮助您的吗?'
+                    out = self.reply_text(FromUserName, ToUserName, CreateTime, MsgType, reply_content)
                 else:
                     # 查找不到关键字,默认回复
-                    reply_content = "客服小二智商不够用啦~"
+                    MsgType = "transfer_customer_service"
+                    reply_content = "客服接入中，稍后将为您服务"
                 if reply_content:
                     CreateTime = int(time.time())
                     out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
-                    self.write(out)
             except:
                 pass
 
@@ -135,15 +137,15 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     # 关注事件
                     CreateTime = int(time.time())
                     reply_content = self.sys_order_reply
-                    out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
+                    MsgType = 'text'
+                    out = self.reply_text(FromUserName, ToUserName, CreateTime, MsgType, reply_content)
                     self.write(out)
             except:
                 pass
 
-    def reply_text(self, FromUserName, ToUserName, CreateTime, Content):
+    def reply_text(self, FromUserName, ToUserName, CreateTime,MsgType, Content):
         """回复文本消息模板"""
-        textTpl = """<xml> <ToUserName><![CDATA[%s]]></ToUserName> <FromUserName><![CDATA[%s]]></FromUserName> <CreateTime>%s</CreateTime> <MsgType><![CDATA[%s]]></MsgType> <Content><![CDATA[%s]]></Content></xml>"""
-        out = textTpl % (FromUserName, ToUserName, CreateTime, 'text', Content)
+        out = self.render('wechatpost.xml',ToUserName=ToUserName,FromUserName=FromUserName, CreateTime=CreateTime,MsgType=MsgType)
         return out
 
     def check_signature(self, signature, timestamp, nonce):

@@ -1,0 +1,11 @@
+<xml>
+  <ToUserName>{{ToUserName}}</ToUserName>
+  <FromUserName>{{FromUserName}}</FromUserName>
+  <CreateTime>{{CreateTime}}</CreateTime>
+  <MsgType>{{MsgType}}</MsgType>
+  {% if TransInfo %}
+  <TransInfo>
+    <KfAccount>{{KfAccount}}</KfAccount>
+  </TransInfo>
+  {% end %}
+</xml>
