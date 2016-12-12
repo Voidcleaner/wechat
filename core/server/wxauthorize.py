@@ -145,7 +145,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
     def reply_text(self, FromUserName, ToUserName, CreateTime,MsgType, Content):
         """回复文本消息模板"""
-        out = self.render_string('wechatpost.xml',ToUserName=ToUserName,FromUserName=FromUserName, CreateTime=CreateTime,MsgType=MsgType,TransInfo=,KfAccount=)
+        out = self.render_string('wechatpost.xml',ToUserName=ToUserName,FromUserName=FromUserName, CreateTime=CreateTime,MsgType=MsgType,TransInfo=None,KfAccount=None)
         logger.debug(out)
         return out
 
