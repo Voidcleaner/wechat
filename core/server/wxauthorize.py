@@ -124,10 +124,10 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     reply_content = "客服接入中，稍后将为您服务"
                 if reply_content:
                     CreateTime = int(time.time())
-                    out = self.reply_text(FromUserName, ToUserName, CreateTime, reply_content)
+                    out = self.reply_text(FromUserName, ToUserName, CreateTime, MsgType, reply_content)
                     self.write(out)
-            except:
-                pass
+            except Exception as e:
+                logger.error(str(e))
 
         elif MsgType == 'event':
             '''接收事件推送'''
