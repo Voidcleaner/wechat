@@ -119,8 +119,15 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     MsgType = 'text'
                     reply_content = '您好,请问有什么可以帮助您的吗?'
                 else:
-                    # 查找不到关键字,默认回复
-                    MsgType = "transfer_customer_service"
+                    # 接入多客服系统
+                    MsgType = 'transfer_customer_service'
+                    reply_content = Content
+                    CreateTime = int(time.time())
+                    out = self.reply_text(FromUserName, ToUserName, CreateTime, MsgType, reply_content)
+                    self.write(out)
+
+                    # 查找不到关键字,同时默认回复
+                    MsgType = "text"
                     reply_content = "客服接入中，稍后将为您服务"
                 if reply_content:  
                     CreateTime = int(time.time())
