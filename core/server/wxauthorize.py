@@ -122,7 +122,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     # 查找不到关键字,默认回复
                     MsgType = "transfer_customer_service"
                     reply_content = "客服接入中，稍后将为您服务"
-                if reply_content:
+                if reply_content:  
                     CreateTime = int(time.time())
                     out = self.reply_text(FromUserName, ToUserName, CreateTime, MsgType, reply_content)
                     self.write(out)
@@ -145,8 +145,8 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
     def reply_text(self, FromUserName, ToUserName, CreateTime,MsgType, Content):
         """回复文本消息模板"""
-        out = self.render_string('wechatpost.xml',ToUserName=ToUserName,FromUserName=FromUserName, CreateTime=CreateTime,MsgType=MsgType,TransInfo=None,KfAccount=None)
-        logger.debug(out)
+        textTpl = '''<xml> <ToUserName><![CDATA[%s]]></ToUserName> <FromUserName><![CDATA[%s]]></FromUserName> <CreateTime>%s</CreateTime> <MsgType><![CDATA[%s]]></MsgType> <Content><![CDATA[%s]]></Content></xml>'''
+        out = textTpl % (FromUserName, ToUserName,CreateTime,MsgType,Content)
         return out
 
     def check_signature(self, signature, timestamp, nonce):
