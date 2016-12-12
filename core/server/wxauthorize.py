@@ -145,7 +145,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
     def reply_text(self, FromUserName, ToUserName, CreateTime,MsgType, Content):
         """回复文本消息模板"""
-        out = self.render('wechatpost.xml',ToUserName=ToUserName,FromUserName=FromUserName, CreateTime=CreateTime,MsgType=MsgType)
+        out = self.render_string('wechatpost.xml',ToUserName=ToUserName,FromUserName=FromUserName, CreateTime=CreateTime,MsgType=MsgType)
         return out
 
     def check_signature(self, signature, timestamp, nonce):
