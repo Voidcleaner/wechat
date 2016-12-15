@@ -67,7 +67,7 @@ class WxAuthorServer(object):
         """拉取用户信息"""
         url = self.get_userinfo_url + 'access_token=%s&openid=%s&lang=zh_CN' % (access_token, openid)
         r = requests.get(url)
-        logger.debug('【微信网页授权】拉取用户信息Response[' + str(r.status_code) + ']')
+        logger.debug('【微信网页授权】拉取用户信息Response[' + str(r.status_code) + ']') 
         if r.status_code == 200:
             res = r.text
             json_data = json.loads((res.encode('iso-8859-1')).decode('utf-8'))
@@ -124,6 +124,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                     reply_content = Content
                     CreateTime = int(time.time())
                     out = self.reply_text(FromUserName, ToUserName, CreateTime, MsgType, reply_content)
+                    logger.debug(out)
                     self.write(out)
 
                     # 查找不到关键字,同时默认回复

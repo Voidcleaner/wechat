@@ -21,12 +21,14 @@ class WxMenuServer(object):
 
     def create_menu(self):
         """自定义菜单创建接口"""
-        access_token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
+        access_token = self._token_cache.get_cache(
+            self._token_cache.KEY_ACCESS_TOKEN)
         if access_token:
             url = WxConfig.menu_create_url + access_token
             data = self.create_menu_data()
             r = requests.post(url, data.encode('utf-8'))
-            logger.debug('【微信自定义菜单】自定义菜单创建接口Response[' + str(r.status_code) + ']')
+            logger.debug('【微信自定义菜单】自定义菜单创建接口Response[' +
+                         str(r.status_code) + ']')
             if r.status_code == 200:
                 res = r.text
                 logger.debug('【微信自定义菜单】自定义菜单创建接口' + res)
@@ -39,11 +41,13 @@ class WxMenuServer(object):
 
     def get_menu(self):
         """自定义菜单查询接口"""
-        access_token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
+        access_token = self._token_cache.get_cache(
+            self._token_cache.KEY_ACCESS_TOKEN)
         if access_token:
             url = WxConfig.menu_get_url + access_token
             r = requests.get(url)
-            logger.debug('【微信自定义菜单】自定义菜单查询接口Response[' + str(r.status_code) + ']')
+            logger.debug('【微信自定义菜单】自定义菜单查询接口Response[' +
+                         str(r.status_code) + ']')
             if r.status_code == 200:
                 res = r.text
                 logger.debug('【微信自定义菜单】自定义菜单查询接口' + res)
@@ -56,11 +60,13 @@ class WxMenuServer(object):
 
     def delete_menu(self):
         """自定义菜单删除接口"""
-        access_token = self._token_cache.get_cache(self._token_cache.KEY_ACCESS_TOKEN)
+        access_token = self._token_cache.get_cache(
+            self._token_cache.KEY_ACCESS_TOKEN)
         if access_token:
             url = WxConfig.menu_delete_url + access_token
             r = requests.get(url)
-            logger.debug('【微信自定义菜单】自定义菜单删除接口Response[' + str(r.status_code) + ']')
+            logger.debug('【微信自定义菜单】自定义菜单删除接口Response[' +
+                         str(r.status_code) + ']')
             if r.status_code == 200:
                 res = r.text
                 logger.debug('【微信自定义菜单】自定义菜单删除接口' + res)
@@ -74,15 +80,33 @@ class WxMenuServer(object):
     def create_menu_data(self):
         """创建菜单数据"""
         menu_data = {'button': []}  # 大菜单
-        menu_Index0 = {
-            'type': 'view',
-            'name': '测试菜单1',
-            'url': self._wx_author_server.get_code_url('menuIndex0')
+        menu_l1_1 = {
+            'name': '最新优惠',
+            'sub_button': []
         }
-        menu_data['button'].append(menu_Index0)
+
+        menu_l1_2 = {
+            'name': '会员中心',
+            'sub_button': []
+        }
+        menu_l2_1 = {
+            'type': 'view',
+            'name': '暖冬有礼',
+            'url': 'http://www.baidu.com'
+        }
+
+        menu_l2_2 = {
+            'type': 'click',
+            'name': '申请会员',
+            'key': 'VIP_APPLY'
+        }
+        menu_l1_1['sub_button'].append(menu_l2_1)
+        menu_l1_2['sub_button'].append(menu_l2_2)
+        menu_data['button'].append(menu_l1_1, menu_l1_2)
         MENU_DATA = json.dumps(menu_data, ensure_ascii=False)
         logger.debug('【微信自定义菜单】创建菜单数据MENU_DATA[' + str(MENU_DATA) + ']')
         return MENU_DATA
+
 
 if __name__ == '__main__':
     wx_menu_server = WxMenuServer()
