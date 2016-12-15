@@ -54,7 +54,10 @@ class WxMenuServer(object):
                 json_res = json.loads(res)
                 if 'errcode' in json_res.keys():
                     errcode = json_res['errcode']
-                    return errcode
+                    if errcode == 0:
+                        return json_res
+                    else:
+                        return errcode
         else:
             logger.error('【微信自定义菜单】自定义菜单查询接口获取不到access_token')
 

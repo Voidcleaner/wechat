@@ -7,6 +7,7 @@ import requests
 import json
 from urllib import parse
 from core.server.wxconfig import WxConfig
+from core.server.wxmenu import WxMenuServer
 try:
     import xml.etree.cElementTree as ET
 except ImportError:
@@ -39,7 +40,6 @@ class WxAuthorServer(object):
 
     """拉取用户信息"""
     get_userinfo_url = 'https://api.weixin.qq.com/sns/userinfo?'
-
 
     def get_code_url(self, state):
         """获取code的url"""
@@ -97,6 +97,18 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.write(echostr)
             else:
                 logger.error('微信sign校验,---校验失败')
+
+            menu = WxMenuServer()
+            try:
+                json_res = menu.getMenu()
+                if 'menu' in json_res.keys():
+                    pass
+                else:
+                    menu.create_menu()
+            except Exception as e:
+                logger.error('微信获取menu失败')
+
+
         except Exception as e:
             logger.error('微信sign校验,---Exception' + str(e))
 
@@ -154,7 +166,7 @@ class WxSignatureHandler(tornado.web.RequestHandler):
     def reply_text(self, FromUserName, ToUserName, CreateTime,MsgType, Content):
         """回复文本消息模板"""
         textTpl = '''<xml> <ToUserName><![CDATA[%s]]></ToUserName> <FromUserName><![CDATA[%s]]></FromUserName> <CreateTime>%s</CreateTime> <MsgType><![CDATA[%s]]></MsgType> <Content><![CDATA[%s]]></Content></xml>'''
-        out = textTpl % (FromUserName, ToUserName,CreateTime,MsgType,Content)
+        out = textTpl % (FromUserName, ToUserName, CreateTime, MsgType, Content)
         return out
 
     def check_signature(self, signature, timestamp, nonce):
@@ -166,6 +178,4 @@ class WxSignatureHandler(tornado.web.RequestHandler):
         sha1 = hashlib.sha1(s.encode('utf-8')).hexdigest()
         logger.debug('sha1=' + sha1 + '&signature=' + signature)
         return sha1 == signature
-
-
 
