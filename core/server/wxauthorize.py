@@ -100,8 +100,8 @@ class WxSignatureHandler(tornado.web.RequestHandler):
 
             menu = WxMenuServer()
             try:
-                json_res = menu.getMenu()
-                if 'menu' in json_res.keys():
+                menu = menu.getMenu()
+                if 'button' in menu:
                     pass
                 else:
                     menu.create_menu()
