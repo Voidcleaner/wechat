@@ -7,11 +7,11 @@ import requests
 import json
 from urllib import parse
 from core.server.wxconfig import WxConfig
-from core.server.wxmenu import WxMenuServer
 try:
     import xml.etree.cElementTree as ET
 except ImportError:
     import xml.etree.ElementTree as ET
+
 
 class WxAuthorServer(object):
     """
@@ -97,18 +97,6 @@ class WxSignatureHandler(tornado.web.RequestHandler):
                 self.write(echostr)
             else:
                 logger.error('微信sign校验,---校验失败')
-
-            menu = WxMenuServer()
-            try:
-                menu = menu.getMenu()
-                if 'button' in menu:
-                    pass
-                else:
-                    menu.create_menu()
-            except Exception as e:
-                logger.error('微信获取menu失败')
-
-
         except Exception as e:
             logger.error('微信sign校验,---Exception' + str(e))
 
