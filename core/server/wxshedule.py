@@ -98,7 +98,7 @@ class WxShedule(object):
         try:
 
             data = menu.get_menu()
-            logger.debug('微信获取menu' + data)
+            logger.debug('微信获取menu' + str(data))
             if data == 0:
                 pass
             else:
