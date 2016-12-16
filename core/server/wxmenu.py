@@ -104,7 +104,8 @@ class WxMenuServer(object):
         }
         menu_l1_1['sub_button'].append(menu_l2_1)
         menu_l1_2['sub_button'].append(menu_l2_2)
-        menu_data['button'].append(menu_l1_1, menu_l1_2)
+        menu_data['button'].append(menu_l1_1)
+        menu_data['button'].append(menu_l1_2)
         MENU_DATA = json.dumps(menu_data, ensure_ascii=False)
         logger.debug('【微信自定义菜单】创建菜单数据MENU_DATA[' + str(MENU_DATA) + ']')
         return MENU_DATA
