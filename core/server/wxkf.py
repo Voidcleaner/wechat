@@ -1,6 +1,6 @@
 import requests
 import json
-from core.server.wxconfig import Wxconfig
+from core.server.wxconfig import WxConfig
 from core.server.tokencache import TokenCache
 from core.logger_helper import logger
 from core.server.wxauthorize import WxAuthorServer
