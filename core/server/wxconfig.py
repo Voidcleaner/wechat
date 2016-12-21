@@ -25,8 +25,11 @@ class WxConfig(object):
 
     '''多客服接口'''
 
-    kf_inquire_url = 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token='
-    kf_online_inquire_url = 'https://api.weixin.qq.com/cgi-bin/customservice/getonlinekflist?access_token='
+    get_kf_list= 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token='
+    get_online_kf_list= 'https://api.weixin.qq.com/cgi-bin/customservice/getonlinekflist?access_token='
+    add_kf = 'https://api.weixin.qq.com/customservice/kfaccount/add?access_token='
+    invite_kf = 'https://api.weixin.qq.com/customservice/kfaccount/inviteworker?access_token='
+    update_kf = 'https://api.weixin.qq.com/customservice/kfaccount/update?access_token='
 
 
 
