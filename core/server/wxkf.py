@@ -15,7 +15,7 @@ class WxKF(object):
             self._token_cache.KEY_ACCESS_TOKEN)
         if access_token:
 
-            url = Wxconfig.add_kf + access_token
+            url = WxConfig.add_kf + access_token
             data = self.add_kf_data()
             r = requests.post(url, data.encode('utf-8'))
             logger.debug('【微信多客服系统】Response' + str(r.status_code))
@@ -44,7 +44,7 @@ class WxKF(object):
 
         if access_token:
 
-            url = Wxconfig.invite_kf + access_token
+            url = WxConfig.invite_kf + access_token
             invite_data = {'kf_account' : 'bzw_lolface@test',
                            'invite_wx': 'bzw_lolface'}
             r = requests.post(url,json.dumps(
