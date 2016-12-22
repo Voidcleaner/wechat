@@ -31,7 +31,7 @@ class WxKF(object):
 
     def add_kf_data(self):
         '''创建客服数据'''
-        kf_data = {'kf_account': 'bzw_lolface@a30040693的接口测试号',
+        kf_data = {'kf_account': 'bzw_lolface@gh_cacb86407b98',
                    'nickname': '小包'}
         KF_DATA = json.dumps(kf_data, ensure_ascii=False)
         logger.debug('【微信客服创建客服数据KF_DATA[' + str(KF_DATA) + ']')
@@ -45,7 +45,7 @@ class WxKF(object):
         if access_token:
 
             url = WxConfig.invite_kf + access_token
-            invite_data = {'kf_account' : 'bzw_lolface@a30040693的接口测试号',
+            invite_data = {'kf_account' : 'bzw_lolface@gh_cacb86407b98',
                            'invite_wx': 'bzw_lolface'}
             r = requests.post(url,json.dumps(
                 invite_data, ensure_ascii=False).encode('utf-8'))
