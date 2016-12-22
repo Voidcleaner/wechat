@@ -93,8 +93,8 @@ class WxMenuServer(object):
         }
         menu_l2_1 = {
             'type': 'view',
-            'name': '暖冬有礼',
-            'url': 'http://www.baidu.com'
+            'name': '会员享9折优惠',
+            'url': self._wx_author_server.get_code_url('menuIndex0')
         }
 
         menu_l2_2 = {

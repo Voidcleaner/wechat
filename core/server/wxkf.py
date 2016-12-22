@@ -45,7 +45,7 @@ class WxKF(object):
         if access_token:
 
             url = WxConfig.invite_kf + access_token
-            invite_data = {'kf_account' : 'bzw_lolface@gh_cacb86407b98',
+            invite_data = {'kf_account': 'bzw_lolface@gh_cacb86407b98',
                            'invite_wx': 'bzw_lolface'}
             r = requests.post(url,json.dumps(
                 invite_data, ensure_ascii=False).encode('utf-8'))
