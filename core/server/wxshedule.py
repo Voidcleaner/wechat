@@ -1,10 +1,10 @@
-from core.logger_helper import logger
 import tornado.ioloop
 import requests
 import json
 from core.server.wxconfig import WxConfig
 from core.cache.tokencache import TokenCache
 from core.server.wxmenu import WxMenuServer
+from core.logger_helper import logger
 
 
 class WxShedule(object):
