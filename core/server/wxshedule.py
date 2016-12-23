@@ -25,11 +25,6 @@ class WxShedule(object):
         tornado.ioloop.IOLoop.instance().call_later(0, self.get_access_token)
         tornado.ioloop.PeriodicCallback(
             self.get_access_token, self._expire_time_access_token).start()
-        # tornado.ioloop.IOLoop.current().start()
-
-        tornado.ioloop.IOLoop.instance().call_later(0, self.get_menu)
-        tornado.ioloop.PeriodicCallback(
-            self.get_menu, self._check_menu_period).start()
 
     def get_access_token(self):
         """获取微信全局唯一票据access_token"""
