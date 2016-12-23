@@ -1,4 +1,5 @@
 import os
+import ptvsd
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
@@ -7,7 +8,7 @@ from core.url import urlpatterns
 from core.server.wxshedule import WxShedule
 
 define('port', default=8000, help='run on the given port', type=int)
-
+ptvsd.settrace(None,('0.0.0.0',8008))
 
 class Application(tornado.web.Application):
     def __init__(self):
