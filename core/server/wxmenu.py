@@ -98,9 +98,9 @@ class WxMenuServer(object):
         }
 
         menu_l2_2 = {
-            'type': 'click',
+            'type': 'view',
             'name': '申请会员',
-            'key': 'VIP_APPLY'
+            'url': self._wx_author_server.get_code_url('apply_vip')
         }
         menu_l1_1['sub_button'].append(menu_l2_1)
         menu_l1_2['sub_button'].append(menu_l2_2)

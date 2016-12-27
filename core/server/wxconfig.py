@@ -9,7 +9,7 @@ class WxConfig(object):
     AppSecret = '4120b03a73416d01a60c827cf9bb2a81'  # AppSecret(应用密钥)
 
     """微信网页开发域名"""
-    AppHost = '144.48.4.116'
+    AppHost = 'wx.parisangel.cn'
 
     '''获取access_token'''
     config_get_access_token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s' % (AppID, AppSecret)
@@ -37,5 +37,6 @@ class WxConfig(object):
     """重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节"""
     wx_menu_state_map = {
         'menuIndex0': '%s/page/index' % AppHost,  # 测试菜单1
+        'apply_vip': '%s/page/login' % AppHost,
     }
 

@@ -3,5 +3,5 @@
     "editor.cursorStyle": "block",
     "python.linting.flake8Enabled": true,
     "python.formatting.provider": "yapf",
-    "python.pythonPath": "D:/Python/Python35"
+    "python.pythonPath": "D:/NewProject/wechat/Scripts/python.exe"
 }
