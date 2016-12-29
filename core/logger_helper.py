@@ -1,9 +1,14 @@
+import os
 import logging
 from logging import Logger
 from logging.handlers import TimedRotatingFileHandler
 
 '''日志管理类'''
 
+web_path = os.path.abspath('.')
+log_dir = os.path.join(web_path,'log')
+all_log_file = os.path.join(log_dir,'all.log')
+error_log_file = os.path.join(log_dir, 'error.log')
 
 def init_logger(logger_name):
     if logger_name not in Logger.manager.loggerDict:
@@ -15,17 +20,17 @@ def init_logger(logger_name):
         formatter = logging.Formatter(format_str, df)
         # handler all
         try:
-            handler1 = TimedRotatingFileHandler('/home/odoo/wechat/log/all.log', when='D', interval=1, backupCount=7)
+            handler1 = TimedRotatingFileHandler(all_log_file, when='D', interval=1, backupCount=7)
         except Exception:
-            handler1 = TimedRotatingFileHandler('/home/odoo/wechat/log/all.log', when='D', interval=1, backupCount=7)
+            handler1 = TimedRotatingFileHandler(all_log_file, when='D', interval=1, backupCount=7)
         handler1.setFormatter(formatter)
         handler1.setLevel(logging.DEBUG)
         logger1.addHandler(handler1)
         # handler error
         try:
-            handler2 = TimedRotatingFileHandler('/home/odoo/wechat/log/error.log', when='D', interval=1, backupCount=7)
+            handler2 = TimedRotatingFileHandler(error_log_file, when='D', interval=1, backupCount=7)
         except Exception:
-            handler2 = TimedRotatingFileHandler('/home/odoo/wechat/log/error.log', when='D', interval=1, backupCount=7)
+            handler2 = TimedRotatingFileHandler(error_log_file, when='D', interval=1, backupCount=7)
         handler2.setFormatter(formatter)
         handler2.setLevel(logging.ERROR)
         logger1.addHandler(handler2)
