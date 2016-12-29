@@ -6,7 +6,7 @@ from logging.handlers import TimedRotatingFileHandler
 '''日志管理类'''
 
 web_path = os.path.abspath('.')
-log_dir = os.path.join(web_path,'log')
+log_dir = os.path.join(web_path,'core','log')
 all_log_file = os.path.join(log_dir,'all.log')
 error_log_file = os.path.join(log_dir, 'error.log')
 
