@@ -1,5 +1,5 @@
 import tornado.web
-import sms
+import core.server.sms
 
 
 class PageHandler(tornado.web.RequestHandler):
