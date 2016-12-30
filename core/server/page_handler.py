@@ -7,7 +7,7 @@ class PageHandler(tornado.web.RequestHandler):
     微信handler处理类
     """
 
-    def post(self, flag):
+    def get(self, flag):
 
         if flag == 'index':
             '''首页'''
@@ -24,7 +24,7 @@ class PageHandler(tornado.web.RequestHandler):
             else:
                 error_msg = '验证码错误,请重新输入'
 
-    def get(self, flag):
+    def post(self, flag):
         if flag == 'login':
 
             phone_number = self.get_argument('mobile_phone_number')
