@@ -1,147 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-
-    <script type="text/javascript">
-    var cur_count;
-    var count = 60; // 重复发送验证码的周期(s)
-    var InterValObj;
-    var phone_number;
-    function send_message()
-    {
-        // 获取用户输入的手机号码
-        // 如果手机号码为空则弹窗提醒
-        // 否则使用 ajax 将号码提交给后台，并且开始倒计时
-        phone_number = document.getElementById("phone").value
-        if(phone_number)
-        {
-            cur_count = count;
-
-            // 设置按钮属性，使按钮不能响应点击事件
-            document.getElementById("getCode").setAttribute("disabled", "true");
-            document.getElementById("getCode").value = "waiting for "+cur_count+"s";
-
-            // HTML DOM setInterval() 方法可以按照指定的周期（毫秒单位）来调用函数或计算表达式
-            // 这里我们以 1000 毫秒为周期重复调用 set_remain_time() 函数实现倒计时
-            InterValObj = window.setInterval(set_remain_time, 1000);
-
-            // 发送请求
-            loadXMLDoc();
-        }
-        else
-        {
-            alert('请输入手机号码!')
-        }
-    }
-
-    function set_remain_time()
-    {
-        if (cur_count == 0)
-        {
-            // 将 InterValObj 传递给 clearInterval， 从而取消对 set_remian_time() 的重复调用
-            window.clearInterval(InterValObj);
-
-            // 恢复按钮响应点击事件
-            document.getElementById("getCode").removeAttribute("disabled");
-            document.getElementById("getCode").value = "Get New Code";
-        }else
-        {
-            cur_count--;
-            document.getElementById("getCode").value = "waiting for "+cur_count+"s";
-        }
-    }
-
-    function loadXMLDoc()
-    {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "login?mobile_phone_number=" + phone_number, true);
-        xmlhttp.send();
-    }
-    </script>
-
-    <style>
-        #phone{
-            position:relative;
-            top:10px;
-            left:50px;
-            width:210px;
-        }
-        #code{
-            position:relative;
-            top:30px;
-            left:50px;
-            width:100px;
-        }
-        #getCode{
-            position:relative;
-            top:30px;
-            left:50px;
-            width:100px;
-        }
-        #submit{
-            position:relative;
-            top:50px;
-            left:50px;
-            width:210px;
-        }
-        #getCode:hover,#submit:hover{
-            cursor:pointer;
-            background-color:#666;
-            color:#FFF;
-        }
-        input,button{
-            border:1px solid #999;
-            height:40px;
-            color:#666;
-        }
-        .h1{
-            position:relative;
-            top:10px;
-            left:130px;
-            color:#666;
-        }
-        .box{
-            top:20%;
-            left:33%;
-            height:300px;
-            width:300px;
-            border:dashed 2px #666;
-            position:absolute;
-        }
-        .warning{
-            position:absolute;
-            left:33%;
-            top:80%;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.0/weui.css" />
 </head>
 
 <body>
-<div class="box">
-    <h1 class="h1">Lab</h1>
-    <form action="#" method="post">
-    <div>
-        <input type="text" id="phone" name="phone" placeholder="Phone Number">
+    <div class="container">
+        <div class="weui_tab">
+            <!--<div class="weui_navbar">
+            <div class="weui_navbar_item">
+                按钮
+            </div>
+            <div class="weui_navbar_item">
+                表单
+            </div>
+        </div>-->
+            <div class="weui_tab_bd">
+                <div class="weui_tab_bd_item" style="display: none;">
+<div class="padding">
+    <a href="javascript:;" id="btnAlert" class="weui_btn weui_btn_warn">Alert</a>
+    <a href="javascript:;" id="btnConfirm" class="weui_btn weui_btn_primary">Confirm</a>
+    <a href="javascript:;" id="btnDialog" class="weui_btn weui_btn_default">Dialog</a>
+    <a href="javascript:;" id="btnToast" class="weui_btn weui_btn_primary">Toast</a>
+    <a href="javascript:;" id="btnLoading" class="weui_btn weui_btn_default">Loading</a>
+    <a href="javascript:;" id="btnTopTips" class="weui_btn weui_btn_default">TopTips</a>
+    <a href="javascript:;" id="btnActionSheet" class="weui_btn weui_btn_default">ActionSheet</a>
+</div>
+</div>
+<div class="weui_tab_bd_item" style="display: none;">
+<div class="weui_cells_title">表单</div>
+<form id="form">
+    <div class="weui_cells weui_cells_form">
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="tel" required pattern="[0-9]{11}" maxlength="11" placeholder="输入你现在的手机号" emptyTips="请输入手机号"
+                    notMatchTips="请输入正确的手机号">
+            </div>
+            <div class="weui_cell_ft">
+                <i class="weui_icon_warn"></i>
+            </div>
+        </div>
+        <div class="weui_cell weui_vcode">
+            <div class="weui_cell_hd"><label class="weui_label">验证码</label></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="number" required placeholder="点击验证码更换" tips="请输入验证码">
+            </div>
+            <div class="weui_cell_ft">
+                <i class="weui_icon_warn"></i>
+                <img src="http://weui.github.io/weui/images/vcode.jpg">
+            </div>
+        </div>
     </div>
-    <div>
-        <input type="text" id="code" name="code" placeholder="Verification Code">
-        <input type="button" id ="getCode" onclick="send_message()" value = "Get Code"/>
+    <div class="weui_btn_area">
+        <a id="formSubmitBtn" href="javascript:" class="weui_btn weui_btn_primary">提交</a>
     </div>
-    <div>
-        <button type="submit" id="submit">Submit</button>
-    </div>
-    </div>
-        {{ error_msg }}
-    </div>
-    </form>
-
+</form>
+</div>
+</div>
+<div class="weui_tabbar">
+    <a href="javascript:;" class="weui_tabbar_item">
+        <div class="weui_tabbar_icon">
+            <img src="https://weui.github.io/weui/images/icon_nav_button.png" alt="">
+        </div>
+        <p class="weui_tabbar_label">按钮</p>
+    </a>
+    <a href="javascript:;" class="weui_tabbar_item">
+        <div class="weui_tabbar_icon">
+            <img src="https://weui.github.io/weui/images/icon_nav_msg.png" alt="">
+        </div>
+        <p class="weui_tabbar_label">表单</p>
+    </a>
+</div>
+</div>
 </div>
 {% if error_msg %}
-    <p style="color:red" class="warning" >{{ error_msg }}</p>
+<p style="color:red" class="warning" >{{ error_msg }}</p>
 {% else %}
-    <p class="warning"></p>
+<p class="warning"></p>
 {% endif %}
 </body>
+
 </html>

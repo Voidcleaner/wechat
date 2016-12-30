@@ -15,6 +15,12 @@ class PageHandler(tornado.web.RequestHandler):
 
         if flag == 'login':
             '''注册及登录'''
+            self.render('login.html')
+            
+
+    def post(self, flag):
+        if flag == 'register':
+
             phone_number = self.get_argument('phone')
             code = self.get_argument('code')
             if code == '':
@@ -23,16 +29,4 @@ class PageHandler(tornado.web.RequestHandler):
                 self.render('success.html')
             else:
                 error_msg = '验证码错误,请重新输入'
-
-    def post(self, flag):
-        if flag == 'login':
-
-            phone_number = self.get_argument('mobile_phone_number')
-
-            if phone_number is not None:
-                if sms.send_message(phone_number):
-                    self.render('login.html')
-                else:
-                    error_msg = '获取验证码失败，请稍后再试'
-
 
