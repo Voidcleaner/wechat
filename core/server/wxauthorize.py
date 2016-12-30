@@ -24,7 +24,7 @@ class WxAuthorServer(object):
     get_userinfo                            拉取用户信息
     """
     """授权后重定向的回调链接地址，请使用urlencode对链接进行处理"""
-    REDIRECT_URI = 'https://%s/wx/wxauthor' % WxConfig.AppHost
+    REDIRECT_URI = 'http://%s/wx/wxauthor' % WxConfig.AppHost
     """
     应用授权作用域
     snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid）
