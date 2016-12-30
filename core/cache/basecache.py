@@ -2,7 +2,7 @@ import redis
 
 """缓存服务器"""
 CACHE_SERVER = {
-    'host': '127.0.0.1',
+    'host': '144.48.4.116',
     'port': 6379,
     'database': 0,
     'password': '',

@@ -24,7 +24,7 @@ class WxAuthorServer(object):
     get_userinfo                            拉取用户信息
     """
     """授权后重定向的回调链接地址，请使用urlencode对链接进行处理"""
-    REDIRECT_URI = r'%s/wx/wxauthor' % WxConfig.AppHost
+    REDIRECT_URI = '%s/wx/wxauthor' % WxConfig.AppHost
     """
     应用授权作用域
     snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid）
@@ -40,8 +40,8 @@ class WxAuthorServer(object):
     def get_code_url(self, state):
         """获取code的url"""
         dict = {'redirect_uri': self.REDIRECT_URI}
-        redirect_uri = urllib.parse.urlencode(dict)
-        author_get_code_url = r'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&%s&response_type=code&scope=%s&state=%s#wechat_redirect' % (
+        redirect_uri = self.REDIRECT_URI#urllib.parse.urlencode(dict)
+        author_get_code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&%s&response_type=code&scope=%s&state=%s#wechat_redirect' % (
             WxConfig.AppID, redirect_uri, self.SCOPE, state)
         logger.debug('【微信网页授权】获取网页授权的code的url>>>>' + author_get_code_url)
         return author_get_code_url
