@@ -159,7 +159,7 @@
             "type": "python",
             "request": "attach",
             "localRoot": "${workspaceRoot}",
-            "remoteRoot": "/home/odoo/wechat-virtual/wechat",
+            "remoteRoot": "/home/odoo/wechat",
             "port": 8008,
             "host": "144.48.4.116"
         }
